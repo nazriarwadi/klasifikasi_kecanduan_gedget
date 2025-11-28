@@ -36,13 +36,15 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link {{ Request::routeIs('tes-kecanduan') ? 'active' : '' }}" href="#">Tes
-                            Kecanduan</a>
+                        <a class="nav-link {{ Request::routeIs('tes.kecanduan') ? 'active' : '' }}"
+                            href="{{ route('tes.kecanduan') }}">Tes Kecanduan</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link {{ Request::routeIs('data-grafik') ? 'active' : '' }}" href="#">Data
-                            Grafik</a>
+                        <a class="nav-link {{ Request::routeIs('data.grafik*') ? 'active' : '' }}"
+                            href="{{ route('data.grafik') }}">
+                            Data Grafik
+                        </a>
                     </li>
 
                     <li class="nav-item">

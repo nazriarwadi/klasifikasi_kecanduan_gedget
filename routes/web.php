@@ -1,18 +1,21 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TesKecanduanController;
+use App\Http\Controllers\DataGrafikController;
 
-// Grouping agar lebih terorganisir
 Route::prefix('/')->group(function () {
 
-    // Halaman Beranda (Handle '/' dan '/beranda')
     Route::view('/', 'home')->name('home');
     Route::view('/beranda', 'home');
-
-    // Halaman Informasi
     Route::view('/informasi', 'informasi')->name('informasi');
 
-    // Halaman Lainnya (Pastikan file view-nya sudah ada)
-    // Route::view('/tes-kecanduan', 'tes')->name('tes');
-    // Route::view('/data-grafik', 'grafik')->name('grafik');
+    // ROUTE TES KECANDUAN (Panggil Controller)
+    Route::get('/tes-kecanduan', [TesKecanduanController::class, 'index'])->name('tes.kecanduan');
+    Route::post('/tes-submit', [TesKecanduanController::class, 'store'])->name('tes.simpan');
+    Route::get('/tes-hasil/{id}', [TesKecanduanController::class, 'showResult'])->name('tes.hasil');
+    Route::get('/data-grafik', [DataGrafikController::class, 'index'])->name('data.grafik');
+    // Route Download PDF
+    Route::get('/tes-cetak/{id}', [TesKecanduanController::class, 'cetakPdf'])->name('tes.cetak');
+
 });

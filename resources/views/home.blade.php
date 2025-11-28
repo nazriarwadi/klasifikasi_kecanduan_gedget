@@ -10,7 +10,9 @@
                 <p class="lead mt-3 text-muted">
                     Website ini akan membantu anda dalam menilai tingkat kecanduan gadget dan memberikan solusi terbaik.
                 </p>
-                <a href="#" class="btn btn-custom-red btn-lg mt-3 rounded-pill px-4">Mulai Tes Sekarang</a>
+                <a href="{{ route('tes.kecanduan') }}" class="btn btn-custom-red btn-lg mt-3 rounded-pill px-4">
+                    Mulai Tes Sekarang
+                </a>
             </div>
 
             <div class="col-md-6 text-center">
