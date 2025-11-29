@@ -79,21 +79,25 @@
 
             <div class="mt-4">
 
+                {{-- Tombol Download PDF --}}
                 <a href="{{ route('tes.cetak', $hasil->id) }}"
-                    class="btn btn-primary btn-lg px-4 me-2 mb-2 rounded-pill shadow-sm">
-                    <i class="bi bi-file-earmark-pdf-fill me-2"></i> Download PDF
+                    class="btn btn-custom-red btn-lg px-4 me-2 mb-2 rounded-pill shadow-sm">
+                    <i class="bi bi-file-earmark-pdf-fill me-2"></i> Download PDF</i>
                 </a>
 
+                {{-- Tombol Data Grafik --}}
                 <a href="{{ route('data.grafik') }}"
-                    class="btn btn-info btn-lg px-4 me-2 mb-2 rounded-pill shadow-sm text-white">
-                    <i class="bi bi-bar-chart-fill me-2"></i> Data Grafik
+                    class="btn btn-custom-red btn-lg px-4 me-2 mb-2 rounded-pill shadow-sm text-white">
+                    <i class="bi bi-bar-chart-fill me-2"></i> Data Grafik</i>
                 </a>
 
+                {{-- Tombol Ulangi Tes --}}
                 <a href="{{ route('tes.kecanduan') }}"
-                    class="btn btn-outline-secondary btn-lg px-4 me-2 mb-2 rounded-pill">
-                    <i class="bi bi-arrow-repeat me-2"></i> Ulangi Tes
+                    class="btn btn-custom-red btn-lg px-4 me-2 mb-2 rounded-pill shadow-sm">
+                    <i class="bi bi-arrow-repeat me-2"></i> Ulangi Tes</i>
                 </a>
 
+                {{-- Tombol Beranda (Tanpa Icon Kanan) --}}
                 <a href="{{ route('home') }}" class="btn btn-custom-red btn-lg px-4 mb-2 rounded-pill shadow-sm">
                     <i class="bi bi-house-door-fill me-2"></i> Beranda
                 </a>

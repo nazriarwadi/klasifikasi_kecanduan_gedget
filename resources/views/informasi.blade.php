@@ -26,13 +26,13 @@
                 </ul>
             </div>
             <div class="col-md-5 text-center">
-                <img src="{{ asset('img/kids-illustration.png') }}" class="img-fluid rounded shadow-sm" alt="Bahaya Gadget">
+                <img src="{{ asset('img/bahaya_gadget.png') }}" class="img-fluid rounded shadow-sm" alt="Bahaya Gadget">
             </div>
         </div>
 
         <div class="row align-items-center mb-5 pb-3 bg-light p-4 rounded-4">
             <div class="col-md-5 text-center order-md-1 order-2">
-                <img src="{{ asset('img/kids-illustration.png') }}" class="img-fluid rounded shadow-sm" alt="Solusi Gadget">
+                <img src="{{ asset('img/kecanduan.png') }}" class="img-fluid rounded shadow-sm" alt="Solusi Gadget">
             </div>
             <div class="col-md-7 order-md-2 order-1 ps-md-5">
                 <h3 class="fw-bold mb-3">Cara Agar Anak <span class="text-custom-red">Tidak Kecanduan</span></h3>

@@ -17,5 +17,7 @@ Route::prefix('/')->group(function () {
     Route::get('/data-grafik', [DataGrafikController::class, 'index'])->name('data.grafik');
     // Route Download PDF
     Route::get('/tes-cetak/{id}', [TesKecanduanController::class, 'cetakPdf'])->name('tes.cetak');
+    // Route Lihat Hasil Tes Terakhir
+    Route::get('/tes/hasil-terakhir', [TesKecanduanController::class, 'lihatHasilTerakhir'])->name('tes.hasil.terakhir');
 
 });

@@ -31,7 +31,7 @@
                         <label class="form-label fw-bold">Kelas</label>
                         <select class="form-select p-3 rounded-3" name="kelas" required>
                             <option value="" selected disabled>Pilih Kelas</option>
-                            @for ($i = 1; $i <= 6; $i++)
+                            @for ($i = 3; $i <= 6; $i++)
                                 <option value="{{ $i }}">{{ $i }} (Sekolah Dasar)</option>
                             @endfor
                         </select>
@@ -41,7 +41,7 @@
                         <label class="form-label fw-bold">Umur</label>
                         <select class="form-select p-3 rounded-3" name="umur" required>
                             <option value="" selected disabled>Pilih Umur</option>
-                            @for ($i = 6; $i <= 13; $i++)
+                            @for ($i = 8; $i <= 12; $i++)
                                 <option value="{{ $i }}">{{ $i }} Tahun</option>
                             @endfor
                         </select>

@@ -26,7 +26,7 @@
                                 <label class="form-label small fw-bold text-muted">Kelas</label>
                                 <select class="form-select rounded-3" name="kelas">
                                     <option value="">Semua Kelas</option>
-                                    @for ($i = 1; $i <= 6; $i++)
+                                    @for ($i = 3; $i <= 6; $i++)
                                         <option value="{{ $i }}" {{ $filterKelas == $i ? 'selected' : '' }}>Kelas
                                             {{ $i }}</option>
                                     @endfor
@@ -37,7 +37,7 @@
                                 <label class="form-label small fw-bold text-muted">Umur</label>
                                 <select class="form-select rounded-3" name="umur">
                                     <option value="">Semua Umur</option>
-                                    @for ($i = 6; $i <= 13; $i++)
+                                    @for ($i = 8; $i <= 12; $i++)
                                         <option value="{{ $i }}" {{ $filterUmur == $i ? 'selected' : '' }}>
                                             {{ $i }} Tahun</option>
                                     @endfor

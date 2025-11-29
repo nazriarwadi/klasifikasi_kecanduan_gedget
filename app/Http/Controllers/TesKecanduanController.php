@@ -124,6 +124,8 @@ class TesKecanduanController extends Controller
 
         $hasil = HasilTes::create($dataToSave);
 
+        session(['id_tes_terakhir' => $hasil->id]);
+
         return redirect()->route('tes.hasil', ['id' => $hasil->id]);
     }
 
@@ -149,5 +151,25 @@ class TesKecanduanController extends Controller
         // 4. Download file PDF
         // Nama file: Hasil-Tes-NamaAnak.pdf
         return $pdf->download('Hasil-Tes-' . str_replace(' ', '-', $hasil->nama) . '.pdf');
+    }
+
+    // Method untuk melihat hasil tes terakhir dari session
+    public function lihatHasilTerakhir()
+    {
+        // Cek apakah ada ID tersimpan di session
+        if (session()->has('id_tes_terakhir')) {
+            $id = session('id_tes_terakhir');
+
+            // Cek apakah data masih ada di database (untuk jaga-jaga)
+            $hasil = HasilTes::find($id);
+
+            if ($hasil) {
+                return redirect()->route('tes.hasil', ['id' => $id]);
+            }
+        }
+
+        // Jika tidak ada session atau data hilang, kembalikan ke halaman tes awal
+        // dengan pesan error (opsional)
+        return redirect()->route('tes.kecanduan')->with('warning', 'Anda belum melakukan tes atau sesi telah berakhir.');
     }
 }
