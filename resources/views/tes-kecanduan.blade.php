@@ -67,16 +67,50 @@
                 <!-- ================= STEP 1: PART 1 (Soal 1-5) ================= -->
                 <div class="step-section d-none" id="step-1">
                     @for ($i = 1; $i <= 5; $i++)
+                        {{-- LOGIKA PENENTUAN OPSI JAWABAN --}}
+                        @php
+                            $pilihanGanda = [];
+
+                            if ($i == 1) {
+                                // KHUSUS NO 1: DURASI JAM
+                                $pilihanGanda = [
+                                    '1 Jam (atau kurang)' => 1,
+                                    '2 Jam' => 2,
+                                    '3 Jam' => 3,
+                                    '4 Jam' => 4,
+                                    '5 Jam (atau lebih)' => 5,
+                                ];
+                            } elseif ($i == 2) {
+                                // KHUSUS NO 2: DURASI HARI
+                                $pilihanGanda = [
+                                    '1 Hari' => 1,
+                                    '2 - 3 Hari' => 2,
+                                    '4 - 5 Hari' => 3,
+                                    '6 Hari' => 4,
+                                    'Setiap Hari (7 Hari)' => 5,
+                                ];
+                            } else {
+                                // NO 3, 4, 5: SKALA FREKUENSI BIASA
+                                $pilihanGanda = [
+                                    'Tidak pernah' => 1,
+                                    'Jarang' => 2,
+                                    'Kadang-kadang' => 3,
+                                    'Sering' => 4,
+                                    'Selalu' => 5,
+                                ];
+                            }
+                        @endphp
+
                         <div class="mb-5">
                             <p class="fw-bold mb-2">{{ $i }}. {{ $pertanyaan[$i] ?? 'Pertanyaan ' . $i }}</p>
                             <div class="d-flex flex-wrap gap-4">
-                                @foreach (['Tidak pernah/1 jam' => 1, 'Jarang/2 jam' => 2, 'Kadang/3 jam' => 3, 'Sering/4 jam' => 4, 'Selalu/5 jam' => 5] as $label => $val)
+                                @foreach ($pilihanGanda as $label => $val)
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="p{{ $i }}"
                                             id="p{{ $i }}_{{ $val }}" value="{{ $val }}"
                                             required>
                                         <label class="form-check-label"
-                                            for="p{{ $i }}_{{ $val }}">{{ explode('/', $label)[0] }}</label>
+                                            for="p{{ $i }}_{{ $val }}">{{ $label }}</label>
                                     </div>
                                 @endforeach
                             </div>

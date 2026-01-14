@@ -21,7 +21,7 @@
             <a class="navbar-brand" href="#">
                 <img src="{{ asset('img/logo_gedgetCare.png') }}" alt="Logo" width="40" height="40"
                     class="d-inline-block align-text-top me-2">
-                GadgetCore
+                GadgetCare
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
