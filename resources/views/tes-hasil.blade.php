@@ -106,4 +106,10 @@
 
         </div>
     </div>
+
+    {{-- TAMBAHKAN SCRIPT INI DI BAGIAN BAWAH --}}
+    <script>
+        // Simpan penanda bahwa tes sedang aktif di tab ini
+        sessionStorage.setItem('status_tes_aktif', 'true');
+    </script>
 @endsection

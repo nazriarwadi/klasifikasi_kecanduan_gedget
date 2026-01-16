@@ -16,10 +16,12 @@
                     Mulai Tes Sekarang
                 </a>
 
-                {{-- 2. Tombol Lihat Hasil (Hanya Muncul Jika User Pernah Tes / Ada Session) --}}
+                {{-- 2. Tombol Lihat Hasil --}}
+                {{-- Kita tambahkan ID 'btn-lihat-hasil' untuk target JavaScript --}}
                 @if (session()->has('id_tes_terakhir'))
-                    <a href="{{ route('tes.hasil.terakhir') }}"
-                        class="btn btn-outline-danger btn-lg mt-3 ms-2 rounded-pill px-4">
+                    <a href="{{ route('tes.hasil.terakhir') }}" id="btn-lihat-hasil"
+                        class="btn btn-outline-danger btn-lg mt-3 ms-2 rounded-pill px-4" style="display: none;">
+                        {{-- Default di-hidden dulu agar tidak kedip --}}
                         <i class="bi bi-clock-history me-1"></i> Lihat Hasil Tes
                     </a>
                 @endif
@@ -32,4 +34,28 @@
             </div>
         </div>
     </section>
+
+    {{-- SCRIPT PENGONTROL TOMBOL --}}
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Ambil elemen tombol
+            var btnHasil = document.getElementById('btn-lihat-hasil');
+
+            // Cek apakah tombol ada (artinya session PHP masih ada)
+            if (btnHasil) {
+                // Cek apakah session browser (tab) masih menyimpan status tes
+                if (sessionStorage.getItem('status_tes_aktif') === 'true') {
+                    // Jika YA (User hanya refresh atau pindah menu), Munculkan tombol
+                    btnHasil.style.display = 'inline-block';
+                } else {
+                    // Jika TIDAK (User baru buka browser/tab baru), Hapus tombol
+                    // Ini menjaga agar user lain tidak melihat tombol ini
+                    btnHasil.remove();
+
+                    // Opsional: Anda bisa memanggil route untuk menghapus session server via AJAX
+                    // agar lebih aman, tapi menghapus tombol via JS sudah cukup untuk UI.
+                }
+            }
+        });
+    </script>
 @endsection

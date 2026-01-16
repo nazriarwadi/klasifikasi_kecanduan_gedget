@@ -43,72 +43,155 @@ class TesKecanduanController extends Controller
     // Method untuk memproses jawaban (Submit)
     public function store(Request $request)
     {
-        // 1. Validasi Input (Tetap sama)
+        // 1. Validasi Input
         $rules = [
             'nama' => 'required',
             'kelas' => 'required',
             'umur' => 'required',
             'jenis_kelamin' => 'required',
         ];
+        // Validasi semua soal P1-P20
         for ($i = 1; $i <= 20; $i++) {
             $rules['p' . $i] = 'required|integer|min:1|max:5';
         }
         $validatedData = $request->validate($rules);
 
         // ---------------------------------------------------------
-        // IMPLEMENTASI ALGORITMA DECISION TREE C5.0 (Sesuai Bab 3)
+        // IMPLEMENTASI ALGORITMA DECISION TREE C5.0 (SESUAI SKRIPSI)
+        // Referensi: Gambar 3.44 Hasil Pohon Keputusan
         // ---------------------------------------------------------
 
-        // Ambil Nilai Atribut Penting (Root & Node Cabang)
-        // P13: Saya lebih sering main gadget dari pada ngobrol... (Root)
-        $p13 = $request->input('p13'); // Lebih sering gadget drpd keluarga
-        $p18 = $request->input('p18'); // Tidak bisa kontrol diri
+        // Ambil Nilai Atribut Penting untuk Node (Percabangan)
+        $p13 = $request->input('p13'); // Root
+        $p19 = $request->input('p19'); // Node 1.2
+        $p8 = $request->input('p8');  // Node 1.3
+        $p20 = $request->input('p20'); // Node 1.4
+        $p11 = $request->input('p11'); // Node 1.5
+        $p6 = $request->input('p6');  // Node 1.6
+        $p2 = $request->input('p2');  // Node 1.7 (Durasi mingguan)
+        $p16 = $request->input('p16'); // Node 1.8 (Bohong ke ortu)
 
-        $tingkatKecanduan = '';
-        $alasan = ''; // Variabel baru untuk alasan
+        // Default value
+        $tingkatKecanduan = 'Tidak Terdefinisi';
+        $alasan = '';
         $saran = '';
 
-        // --- LOGIKA DECISION TREE C5.0 ---
+        // --- MULAI LOGIKA POHON KEPUTUSAN ---
 
-        // Cek Root (Pertanyaan 13)
+        // ROOT: P13 (Lebih sering main gadget daripada ngobrol dgn keluarga)
         if ($p13 == 1 || $p13 == 2) {
-            // NODE KIRI: Tidak Pernah/Jarang
+            // Tidak Pernah (1) atau Jarang (2)
             $tingkatKecanduan = 'Tidak Kecanduan';
-            $alasan = 'Anak memiliki prioritas sosial yang sangat baik. Ia lebih memilih berinteraksi dengan keluarga dibandingkan bermain gadget.';
-            $saran = 'Pertahankan pola asuh ini. Tetap awasi konten yang diakses, namun berikan apresiasi pada anak karena mampu memprioritaskan keluarga.';
+            $alasan = 'Anak memiliki prioritas sosial yang baik dan lebih memilih interaksi keluarga dibanding gadget.';
+            $saran = 'Pertahankan pola asuh yang hangat ini agar anak tetap nyaman berinteraksi dengan keluarga.';
 
-        } elseif ($p13 == 4 || $p13 == 5) {
-            // NODE KANAN: Sering/Selalu
-            $tingkatKecanduan = 'Kecanduan Berat';
-            $alasan = 'Interaksi sosial utama anak telah tergantikan oleh gadget. Gadget bukan lagi hiburan, melainkan kebutuhan primer yang menggeser peran keluarga.';
-            $saran = 'Segera lakukan "Detoks Digital". Batasi akses gadget secara ketat, simpan gadget di luar kamar tidur, dan perbanyak aktivitas fisik bersama keluarga.';
+        } elseif ($p13 == 5) {
+            // Selalu (5) -> Di skripsi Gambar 3.37 ini masuk Kecanduan Ringan
+            $tingkatKecanduan = 'Kecanduan Ringan';
+            $alasan = 'Meskipun anak sangat sering bermain gadget, pola perilaku lain menunjukkan masih ada kontrol.';
+            $saran = 'Mulai batasi waktu layar secara bertahap dan buat aturan waktu keluarga tanpa gadget.';
 
         } elseif ($p13 == 3) {
-            // NODE TENGAH: Kadang-kadang -> Cek P18
-
-            if ($p18 == 1) {
-                // P18 Tidak Pernah
+            // Kadang-kadang (3) -> Masuk Node 1.1 (Cek P19)
+            // P19: Lebih suka main gadget daripada belajar
+            if ($p19 == 1) { // Tidak Pernah
                 $tingkatKecanduan = 'Tidak Kecanduan';
-                $alasan = 'Meskipun terkadang bermain gadget, anak memiliki kontrol diri yang luar biasa dan tahu kapan harus berhenti.';
-                $saran = 'Aman. Berikan kebebasan terkontrol. Pastikan durasi bermain tetap seimbang dengan waktu belajar.';
-
-            } elseif ($p18 == 2 || $p18 == 3) {
-                // P18 Jarang/Kadang
+                $alasan = 'Minat belajar anak masih tinggi dan tidak terganggu oleh gadget.';
+                $saran = 'Dukung terus prestasi anak dan gunakan gadget hanya sebagai sarana hiburan sesekali.';
+            } elseif ($p19 == 2 || $p19 == 3) { // Jarang/Kadang
                 $tingkatKecanduan = 'Kecanduan Ringan';
-                $alasan = 'Terdeteksi indikasi penurunan kontrol diri. Anak mulai kesulitan berhenti bermain gadget meskipun sadar harus melakukan hal lain.';
-                $saran = 'Waspada. Buat jadwal "Waktu Bebas Gadget" (misal: saat makan malam). Orang tua harus menjadi contoh (role model) yang baik.';
-
-            } elseif ($p18 == 4 || $p18 == 5) {
-                // P18 Sering/Selalu
+                $alasan = 'Mulai terlihat gejala penurunan minat belajar akibat gadget.';
+                $saran = 'Dampingi anak saat belajar dan jauhkan gadget dari ruang belajar.';
+            } else { // Sering (4) / Selalu (5)
                 $tingkatKecanduan = 'Kecanduan Berat';
-                $alasan = 'Anak menyadari ketidakmampuannya mengontrol diri namun terus melanjutkan penggunaan gadget (kompulsif).';
-                $saran = 'Kondisi Kritis. Perlu intervensi tegas. Pertimbangkan konsultasi dengan psikolog anak jika muncul perilaku tantrum saat gadget diambil.';
+                $alasan = 'Gadget telah mengganggu kewajiban utama anak (belajar) secara signifikan.';
+                $saran = 'Perlu tindakan tegas. Sita gadget sementara waktu ujian atau belajar.';
+            }
+
+        } elseif ($p13 == 4) {
+            // Sering (4) -> Masuk Node 1.2 (Cek P8)
+            // P8: Tidak mengerjakan tugas gara-gara gadget
+            if ($p8 == 1 || $p8 == 2) { // TP / Jarang
+                $tingkatKecanduan = 'Tidak Kecanduan'; // (Sesuai Gambar 3.40)
+                $alasan = 'Anak masih bertanggung jawab menyelesaikan tugas sekolahnya.';
+                $saran = 'Berikan apresiasi atas tanggung jawab anak.';
+            } elseif ($p8 == 5) { // Selalu
+                $tingkatKecanduan = 'Kecanduan Ringan'; // (Sesuai Gambar 3.40)
+                $alasan = 'Indikasi kelalaian tugas mulai menjadi kebiasaan.';
+                $saran = 'Cek buku tugas anak setiap hari dan pastikan selesai sebelum bermain HP.';
+            } else { // Sering (4) atau Kadang (3) -> Masuk Node 1.3 (Cek P20)
+                // P20: Gadget membuat merasa lebih baik saat kacau (Pelarian Emosi)
+                if ($p20 == 1 || $p20 == 2) { // TP / Jarang
+                    $tingkatKecanduan = 'Tidak Kecanduan';
+                    $alasan = 'Anak tidak menjadikan gadget sebagai pelarian emosional.';
+                    $saran = 'Ajarkan cara mengelola emosi dengan bercerita atau olahraga.';
+                } elseif ($p20 == 4) { // Sering
+                    $tingkatKecanduan = 'Kecanduan Berat';
+                    $alasan = 'Anak mengalami ketergantungan emosional pada gadget.';
+                    $saran = 'Ajak anak bicara dari hati ke hati saat sedih, jangan biarkan menyendiri dengan gadget.';
+                } elseif ($p20 == 5) { // Selalu
+                    $tingkatKecanduan = 'Kecanduan Ringan';
+                    $alasan = 'Ada kecenderungan menjadikan gadget penenang diri.';
+                    $saran = 'Alihkan ke aktivitas fisik saat anak sedang bad mood.';
+                } else { // Kadang-kadang (3) -> Masuk Node 1.4 (Cek P11)
+                    // P11: Gadget lebih menyenangkan dari hal lain
+                    if ($p11 == 1 || $p11 == 2) { // TP / Jarang
+                        $tingkatKecanduan = 'Tidak Kecanduan';
+                        $alasan = 'Anak masih bisa menikmati aktivitas lain di luar gadget.';
+                        $saran = 'Perbanyak aktivitas outdoor atau hobi baru.';
+                    } elseif ($p11 >= 4) { // Sering/Selalu
+                        $tingkatKecanduan = 'Kecanduan Berat';
+                        $alasan = 'Dunia nyata terasa membosankan bagi anak dibandingkan dunia maya.';
+                        $saran = 'Lakukan "Puasa Gadget" (Dopamine Detox) selama beberapa hari.';
+                    } else { // Kadang (3) -> Masuk Node 1.5 (Cek P6)
+                        // P6: Gadget hal terpenting dalam hidup
+                        if ($p6 == 1 || $p6 == 2) { // TP / Jarang
+                            $tingkatKecanduan = 'Tidak Kecanduan';
+                            $alasan = 'Gadget belum menjadi prioritas utama hidup anak.';
+                            $saran = 'Pertahankan keseimbangan hidup anak.';
+                        } elseif ($p6 >= 4) { // Sering/Selalu
+                            $tingkatKecanduan = 'Kecanduan Berat';
+                            $alasan = 'Anak merasa tidak bisa hidup tanpa gadget.';
+                            $saran = 'Konsultasi dengan psikolog anak mungkin diperlukan.';
+                        } else { // Kadang (3) -> Masuk Node 1.6 (Cek P2)
+                            // P2: Durasi dalam seminggu
+                            if ($p2 == 1 || $p2 == 2) { // 1 hari atau 2-3 hari
+                                $tingkatKecanduan = 'Tidak Kecanduan';
+                                $alasan = 'Frekuensi penggunaan gadget sangat rendah dan sehat.';
+                                $saran = 'Bebaskan bermain sesuai jadwal yang sudah baik ini.';
+                            } elseif ($p2 == 3) { // 4-5 Hari
+                                $tingkatKecanduan = 'Kecanduan Ringan';
+                                $alasan = 'Frekuensi bermain cukup sering (hampir setiap hari sekolah).';
+                                $saran = 'Usahakan hari sekolah (Senin-Jumat) bebas gadget.';
+                            } elseif ($p2 == 4) { // 6 Hari
+                                $tingkatKecanduan = 'Kecanduan Berat';
+                                $alasan = 'Hampir tiada hari tanpa gadget, risiko adiksi tinggi.';
+                                $saran = 'Wajibkan hari libur gadget (misal: Hari Minggu tanpa HP).';
+                            } else { // P2 == 5 (Setiap Hari) -> Masuk Node 1.7 (Cek P16)
+                                // P16: Bohong ke orang tua soal gadget
+                                if ($p16 == 1) { // TP
+                                    $tingkatKecanduan = 'Tidak Kecanduan';
+                                    $alasan = 'Meski main tiap hari, anak jujur dan terbuka (terkontrol).';
+                                    $saran = 'Apresiasi kejujuran anak, tapi kurangi sedikit durasinya.';
+                                } elseif ($p16 == 2 || $p16 == 3) { // Jarang/Kadang
+                                    $tingkatKecanduan = 'Kecanduan Ringan';
+                                    $alasan = 'Mulai muncul perilaku manipulatif/bohong kecil demi gadget.';
+                                    $saran = 'Bangun komunikasi terbuka, jangan terlalu memarahinya agar dia tidak bohong lagi.';
+                                } else { // Sering/Selalu
+                                    $tingkatKecanduan = 'Kecanduan Berat';
+                                    $alasan = 'Anak sering berbohong dan menyembunyikan aktivitas digitalnya.';
+                                    $saran = 'Pasang aplikasi Parental Control untuk memantau aktivitas anak secara transparan.';
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
 
         // --- SIMPAN KE DATABASE ---
 
-        // Hitung total skor (Hanya untuk data statistik)
+        // Hitung total skor (Hanya untuk data statistik/history)
         $totalSkor = 0;
         for ($i = 1; $i <= 20; $i++) {
             $totalSkor += $request->input('p' . $i);
@@ -117,8 +200,6 @@ class TesKecanduanController extends Controller
         $dataToSave = $request->except('_token');
         $dataToSave['total_skor'] = $totalSkor;
         $dataToSave['tingkat_kecanduan'] = $tingkatKecanduan;
-
-        // PENTING: Simpan Alasan dan Saran ke Database
         $dataToSave['alasan'] = $alasan;
         $dataToSave['saran'] = $saran;
 
