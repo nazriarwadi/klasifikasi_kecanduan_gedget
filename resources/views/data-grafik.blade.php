@@ -60,13 +60,28 @@
                                         <h4 class="fw-bold mb-3"><i class="bi bi-info-circle me-2"></i>Insight Data</h4>
                                         <p>Grafik di samping memetakan jawaban Anda ke dalam 5 skala intensitas.</p>
                                         <ul class="list-unstyled">
-                                            <li class="mb-2"><span class="badge bg-white text-primary me-2">Skor
-                                                    5</span> Intensitas Sangat Tinggi.</li>
-                                            <li class="mb-2"><span class="badge bg-white text-primary me-2">Skor
-                                                    4</span> Intensitas Tinggi.</li>
-                                            <li class="mb-2"><span class="badge bg-white text-primary me-2">Skor
-                                                    1-2</span> Aman/Wajar.</li>
+                                            <li class="mb-2">
+                                                <span class="badge bg-white text-primary me-2">Skor 5</span>
+                                                Intensitas Sangat Tinggi.
+                                            </li>
+                                            <li class="mb-2">
+                                                <span class="badge bg-white text-primary me-2">Skor 4</span>
+                                                Intensitas Tinggi.
+                                            </li>
+                                            {{-- BAGIAN SKOR 3 DITAMBAHKAN --}}
+                                            <li class="mb-2">
+                                                <span class="badge bg-white text-primary me-2">Skor 3</span>
+                                                Intensitas Sedang (Waspada).
+                                            </li>
+                                            <li class="mb-2">
+                                                <span class="badge bg-white text-primary me-2">Skor 1-2</span>
+                                                Aman/Wajar.
+                                            </li>
                                         </ul>
+                                        <div class="mt-auto pt-3 border-top border-white border-opacity-25">
+                                            <small>Semakin banyak porsi warna merah/oranye di grafik, semakin tinggi
+                                                indikasi kecanduan Anda.</small>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
