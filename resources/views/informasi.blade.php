@@ -3,12 +3,14 @@
 @section('container')
     <div class="py-5">
 
+        {{-- HEADER --}}
         <div class="text-center mb-5">
             <h2 class="fw-bold display-5">Informasi Sistem</h2>
             <p class="text-muted">Edukasi dan informasi mengenai penggunaan gadget pada anak</p>
             <div class="mx-auto mt-3" style="width: 60px; height: 3px; background-color: var(--main-red);"></div>
         </div>
 
+        {{-- BAGIAN 1: BAHAYA GADGET --}}
         <div class="row align-items-center mb-5 pb-3">
             <div class="col-md-7">
                 <h3 class="fw-bold mb-3"><span class="text-custom-red">Bahaya Gadget</span> Untuk Anak</h3>
@@ -30,6 +32,7 @@
             </div>
         </div>
 
+        {{-- BAGIAN 2: SOLUSI (BG LIGHT) --}}
         <div class="row align-items-center mb-5 pb-3 bg-light p-4 rounded-4">
             <div class="col-md-5 text-center order-md-1 order-2">
                 <img src="{{ asset('img/kecanduan.png') }}" class="img-fluid rounded shadow-sm" alt="Solusi Gadget">
@@ -63,6 +66,66 @@
             </div>
         </div>
 
+        {{-- BAGIAN 3: PANDUAN PENGGUNAAN SISTEM (BARU DITAMBAHKAN) --}}
+        <div class="mb-5">
+            <h3 class="fw-bold text-center mb-5">Langkah <span class="text-custom-red">Penggunaan Sistem</span></h3>
+
+            <div class="row g-4 text-center">
+                {{-- Langkah 1 --}}
+                <div class="col-md-3 col-6">
+                    <div class="card h-100 border-0 shadow-sm p-3">
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <i class="bi bi-play-circle-fill display-4 text-custom-red"></i>
+                            </div>
+                            <h6 class="fw-bold">1. Mulai Tes</h6>
+                            <p class="small text-muted mb-0">Klik tombol "Mulai Tes" di halaman beranda website.</p>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Langkah 2 --}}
+                <div class="col-md-3 col-6">
+                    <div class="card h-100 border-0 shadow-sm p-3">
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <i class="bi bi-person-lines-fill display-4 text-custom-red"></i>
+                            </div>
+                            <h6 class="fw-bold">2. Isi Data Diri</h6>
+                            <p class="small text-muted mb-0">Lengkapi data nama, usia, dan kelas anak sebelum memulai.</p>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Langkah 3 --}}
+                <div class="col-md-3 col-6">
+                    <div class="card h-100 border-0 shadow-sm p-3">
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <i class="bi bi-ui-checks display-4 text-custom-red"></i>
+                            </div>
+                            <h6 class="fw-bold">3. Jawab Soal</h6>
+                            <p class="small text-muted mb-0">Jawab 20 pertanyaan kuesioner sesuai kondisi anak.</p>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Langkah 4 --}}
+                <div class="col-md-3 col-6">
+                    <div class="card h-100 border-0 shadow-sm p-3">
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <i class="bi bi-file-earmark-medical-fill display-4 text-custom-red"></i>
+                            </div>
+                            <h6 class="fw-bold">4. Lihat Hasil</h6>
+                            <p class="small text-muted mb-0">Dapatkan hasil diagnosa, saran, dan unduh laporan PDF.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- BAGIAN 4: KATEGORI KECANDUAN --}}
         <div class="mb-5">
             <h3 class="fw-bold text-center mb-4">Kategori Tingkat Kecanduan</h3>
             <div class="row g-4">
@@ -99,12 +162,16 @@
             </div>
         </div>
 
+        {{-- BAGIAN 5: TEKNIS SISTEM --}}
         <div class="bg-custom-red text-white rounded-4 p-5 text-center mb-5">
             <h3 class="fw-bold">Bagaimana Sistem Ini Bekerja?</h3>
             <p class="mt-3 w-75 mx-auto">
-                Sistem <strong>GadgetCare</strong> menggunakan teknologi <em>Machine Learning</em> dengan algoritma
-                <strong>Decision Tree C5.0</strong>. Sistem menganalisis jawaban kuesioner berdasarkan pola data historis
-                untuk mengklasifikasikan tingkat kecanduan secara akurat dan objektif.
+                Sistem <strong>GadgetCare</strong> menggunakan metode perhitungan bobot skor (<em>Scoring</em>) yang
+                diadaptasi dari kuesioner psikologi standar.
+                Sistem akan menjumlahkan nilai dari setiap jawaban untuk menentukan kategori kecanduan secara objektif.
+                <br><br>
+                <small class="opacity-75">*Metode ini dipilih untuk memberikan hasil diagnosa yang konsisten berdasarkan
+                    intensitas perilaku anak.</small>
             </p>
         </div>
 

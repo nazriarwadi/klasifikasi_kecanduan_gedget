@@ -67,30 +67,29 @@
                 <!-- ================= STEP 1: PART 1 (Soal 1-5) ================= -->
                 <div class="step-section d-none" id="step-1">
                     @for ($i = 1; $i <= 5; $i++)
-                        {{-- LOGIKA PENENTUAN OPSI JAWABAN --}}
                         @php
                             $pilihanGanda = [];
 
                             if ($i == 1) {
-                                // KHUSUS NO 1: DURASI JAM
+                                // KHUSUS NO 1
                                 $pilihanGanda = [
-                                    '1 Jam (atau kurang)' => 1,
-                                    '2 Jam' => 2,
-                                    '3 Jam' => 3,
-                                    '4 Jam' => 4,
-                                    '5 Jam (atau lebih)' => 5,
+                                    '1 jam' => 1,
+                                    '2 jam' => 2,
+                                    '3 jam' => 3,
+                                    '4 jam' => 4,
+                                    '5 jam' => 5,
                                 ];
                             } elseif ($i == 2) {
-                                // KHUSUS NO 2: DURASI HARI
+                                // KHUSUS NO 2
                                 $pilihanGanda = [
-                                    '1 Hari' => 1,
-                                    '2 - 3 Hari' => 2,
-                                    '4 - 5 Hari' => 3,
-                                    '6 Hari' => 4,
-                                    'Setiap Hari (7 Hari)' => 5,
+                                    '1 hari' => 1,
+                                    '2–3 hari' => 2,
+                                    '4–5 hari' => 3,
+                                    '6 hari' => 4,
+                                    'Setiap hari (7 hari)' => 5,
                                 ];
                             } else {
-                                // NO 3, 4, 5: SKALA FREKUENSI BIASA
+                                // FREKUENSI BIASA (No 3, 4, 5)
                                 $pilihanGanda = [
                                     'Tidak pernah' => 1,
                                     'Jarang' => 2,
@@ -125,13 +124,36 @@
                     </div>
                 </div>
 
-                <!-- ================= STEP 2: PART 2 (Soal 6-10) ================= -->
                 <div class="step-section d-none" id="step-2">
                     @for ($i = 6; $i <= 10; $i++)
+                        @php
+                            $pilihanGanda = [];
+
+                            if ($i == 6) {
+                                // SKALA PERSETUJUAN (No 6)
+                                $pilihanGanda = [
+                                    'Tidak pernah' => 1,
+                                    'Jarang' => 2,
+                                    'Kadang-kadang' => 3,
+                                    'Sering' => 4,
+                                    'Selalu' => 5,
+                                ];
+                            } else {
+                                // FREKUENSI BIASA (No 7, 8, 9, 10)
+                                $pilihanGanda = [
+                                    'Tidak pernah' => 1,
+                                    'Jarang' => 2,
+                                    'Kadang-kadang' => 3,
+                                    'Sering' => 4,
+                                    'Selalu' => 5,
+                                ];
+                            }
+                        @endphp
+
                         <div class="mb-5">
                             <p class="fw-bold mb-2">{{ $i }}. {{ $pertanyaan[$i] ?? 'Pertanyaan ' . $i }}</p>
                             <div class="d-flex flex-wrap gap-4">
-                                @foreach (['Tidak pernah' => 1, 'Jarang' => 2, 'Kadang-kadang' => 3, 'Sering' => 4, 'Selalu' => 5] as $label => $val)
+                                @foreach ($pilihanGanda as $label => $val)
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="p{{ $i }}"
                                             id="p{{ $i }}_{{ $val }}" value="{{ $val }}"
@@ -152,13 +174,36 @@
                     </div>
                 </div>
 
-                <!-- ================= STEP 3: PART 3 (Soal 11-15) ================= -->
                 <div class="step-section d-none" id="step-3">
                     @for ($i = 11; $i <= 15; $i++)
+                        @php
+                            $pilihanGanda = [];
+
+                            if ($i == 11 || $i == 15) {
+                                // SKALA PERSETUJUAN (No 11, 15)
+                                $pilihanGanda = [
+                                    'Tidak pernah' => 1,
+                                    'Jarang' => 2,
+                                    'Kadang-kadang' => 3,
+                                    'Sering' => 4,
+                                    'Selalu' => 5,
+                                ];
+                            } else {
+                                // FREKUENSI BIASA (No 12, 13, 14)
+                                $pilihanGanda = [
+                                    'Tidak pernah' => 1,
+                                    'Jarang' => 2,
+                                    'Kadang-kadang' => 3,
+                                    'Sering' => 4,
+                                    'Selalu' => 5,
+                                ];
+                            }
+                        @endphp
+
                         <div class="mb-5">
                             <p class="fw-bold mb-2">{{ $i }}. {{ $pertanyaan[$i] ?? 'Pertanyaan ' . $i }}</p>
                             <div class="d-flex flex-wrap gap-4">
-                                @foreach (['Tidak pernah' => 1, 'Jarang' => 2, 'Kadang-kadang' => 3, 'Sering' => 4, 'Selalu' => 5] as $label => $val)
+                                @foreach ($pilihanGanda as $label => $val)
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="p{{ $i }}"
                                             id="p{{ $i }}_{{ $val }}" value="{{ $val }}"
@@ -179,13 +224,36 @@
                     </div>
                 </div>
 
-                <!-- ================= STEP 4: PART 4 (Soal 16-20) ================= -->
                 <div class="step-section d-none" id="step-4">
                     @for ($i = 16; $i <= 20; $i++)
+                        @php
+                            $pilihanGanda = [];
+
+                            if ($i == 20) {
+                                // SKALA PERSETUJUAN (No 20)
+                                $pilihanGanda = [
+                                    'Tidak pernah' => 1,
+                                    'Jarang' => 2,
+                                    'Kadang-kadang' => 3,
+                                    'Sering' => 4,
+                                    'Selalu' => 5,
+                                ];
+                            } else {
+                                // FREKUENSI BIASA (No 16, 17, 18, 19)
+                                $pilihanGanda = [
+                                    'Tidak pernah' => 1,
+                                    'Jarang' => 2,
+                                    'Kadang-kadang' => 3,
+                                    'Sering' => 4,
+                                    'Selalu' => 5,
+                                ];
+                            }
+                        @endphp
+
                         <div class="mb-5">
                             <p class="fw-bold mb-2">{{ $i }}. {{ $pertanyaan[$i] ?? 'Pertanyaan ' . $i }}</p>
                             <div class="d-flex flex-wrap gap-4">
-                                @foreach (['Tidak pernah' => 1, 'Jarang' => 2, 'Kadang-kadang' => 3, 'Sering' => 4, 'Selalu' => 5] as $label => $val)
+                                @foreach ($pilihanGanda as $label => $val)
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="p{{ $i }}"
                                             id="p{{ $i }}_{{ $val }}" value="{{ $val }}"
@@ -201,7 +269,6 @@
                     <div class="d-flex justify-content-between">
                         <button type="button" class="btn btn-secondary px-4 rounded-3"
                             onclick="prevStep(4)">Kembali</button>
-                        <!-- INI TOMBOL SUBMIT AKHIR -->
                         <button type="submit" class="btn btn-custom-red px-5 rounded-3">Kirim Jawaban Dan Lihat Hasil
                             Tes</button>
                     </div>

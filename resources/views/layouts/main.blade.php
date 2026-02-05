@@ -62,7 +62,7 @@
     </div>
 
     <footer class="bg-custom-red text-white text-center py-3">
-        <small>@2025 GadgetCare, All rights reserved.</small>
+        <small>@2026 GadgetCare, All rights reserved.</small>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
