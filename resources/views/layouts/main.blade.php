@@ -44,7 +44,15 @@
                     <li class="nav-item">
                         <a class="nav-link {{ Request::routeIs('data.grafik*') ? 'active' : '' }}"
                             href="{{ route('data.grafik') }}">
-                            Data Grafik
+                            Data Grafik (Personal)
+                        </a>
+                    </li>
+
+                    {{-- MENU BARU: STATISTIK GLOBAL --}}
+                    <li class="nav-item">
+                        <a class="nav-link {{ Request::routeIs('statistik.global*') ? 'active' : '' }}"
+                            href="{{ route('statistik.global') }}">
+                            Statistik Global
                         </a>
                     </li>
 

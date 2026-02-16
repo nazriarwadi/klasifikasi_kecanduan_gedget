@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TesKecanduanController;
 use App\Http\Controllers\DataGrafikController;
+use App\Http\Controllers\TesKecanduanController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\StatistikGlobalController;
 
 Route::prefix('/')->group(function () {
 
@@ -19,5 +20,6 @@ Route::prefix('/')->group(function () {
     Route::get('/tes-cetak/{id}', [TesKecanduanController::class, 'cetakPdf'])->name('tes.cetak');
     // Route Lihat Hasil Tes Terakhir
     Route::get('/tes/hasil-terakhir', [TesKecanduanController::class, 'lihatHasilTerakhir'])->name('tes.hasil.terakhir');
+    Route::get('/statistik-global', [StatistikGlobalController::class, 'index'])->name('statistik.global');
 
 });
